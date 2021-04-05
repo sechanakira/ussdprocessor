@@ -24,6 +24,10 @@ As a standalone application:
 2. Build the application with mvn clean install -DskipTests
 3. Run java -jar /target/ussdprocessor-0.0.1-SNAPSHOT.jar
 
+No Maven Installation:
+To run the build in the absence of a Maven installation, run the build with the Maven Wrapper as follows:
+./mvnw clean install
+
 Running tests:
 mvn clean install
 
