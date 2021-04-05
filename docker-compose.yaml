@@ -1,0 +1,31 @@
+version: '3.3'
+
+services:
+  #service 1: definition of mysql database
+  db:
+    image: mysql:latest
+    container_name: mysql-db2
+    environment:
+      - MYSQL_ROOT_PASSWORD=changeit
+      #- MYSQL_USER=root
+    ports:
+      - "3306:3306"
+    restart: always
+
+  #service 3: definition of your spring-boot app
+  ussd-backend:
+    image: ussd-backend
+    container_name: ussd-backend-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8090:8090"
+    restart: always
+
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db2:3306/ussdbackend?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: changeit
